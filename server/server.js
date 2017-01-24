@@ -19,6 +19,18 @@ io.on('connection',(socket)=>{
   //   text: 'See you then',
   //   createdAt: 124124
   // });
+  // socket.emit from Admin text Welcome to the chat room
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to the chat room',
+    createdAt: new Date().getTime()
+  });
+  // socket.broadcast.emit from Admin to everyone in the chat room with text new user just joined
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user joined',
+    createdAt: new Date().getTime()
+  });
   // server listening to createMessage from the client
   socket.on('createMessage', (message)=>{
     console.log('createMessage', message);
